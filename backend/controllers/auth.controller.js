@@ -1,5 +1,8 @@
 export const register = (req, res) => {
-    //db operations'
+    const {username,email,password} = req.body
+
+    // HASH THE PASSWORD
+    // CREATE A NEW USER AND SAVE TO DB
     console.log(req.body)
 }
 export const login = (req, res) => {
