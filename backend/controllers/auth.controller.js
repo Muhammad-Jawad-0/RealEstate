@@ -1,9 +1,26 @@
-export const register = (req, res) => {
-    const {username,email,password} = req.body
+import bcrypt from "bcrypt";
+import prisma from "../lib/prisma.js";
+
+
+export const register = async (req, res) => {
+    const { username, email, password } = req.body;
 
     // HASH THE PASSWORD
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("line 11",hashedPassword)
+
+
     // CREATE A NEW USER AND SAVE TO DB
-    console.log(req.body)
+    const newUser = await prisma.user.create({
+        data: {
+            username,
+            email,
+            password: hashedPassword,
+        },
+    });
+
+    console.log(newUser)
 }
 export const login = (req, res) => {
     //db operations
