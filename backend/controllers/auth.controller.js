@@ -61,20 +61,26 @@ export const login = async (req, res) => {
         }, process.env.JWT_SECRET_KEY,
             { expiresIn: age })
 
+        const { password: userPassword, ...userInfo } = user;
+
 
         res.cookie("token", token, {
             httpOnly: true,
             // secure:true
             maxAge: age
-        }).status(200).json({ status: 200, message: "Login Successfull" })
+        }).status(200).json(userInfo)
     } catch (error) {
         console.log("error ====>>>>", error)
         res.status(500).json({ status: 500, message: "FAILED TO LOGIN!" })
+
     }
 }
+
+
+
 export const logout = (req, res) => {
     try {
-        res.clearCookie("token").status(200).json({status:200,message:"LOGOUT SUCCESSFULLY"})
+        res.clearCookie("token").status(200).json({ status: 200, message: "LOGOUT SUCCESSFULLY" })
     } catch (error) {
         console.log("ERRPR", error)
         res.status(500).json({ status: 500, message: "Something Wronge" })
