@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./SearchBar.scss";
+import "./searchBar.scss";
 
 const types = ["buy", "rent"];
 
-const SearchBar = () => {
+function SearchBar() {
   const [query, setQuery] = useState({
     type: "buy",
     location: "",
@@ -16,7 +16,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="SearchBar">
+    <div className="searchBar">
       <div className="type">
         {types.map((type) => (
           <button
@@ -24,21 +24,21 @@ const SearchBar = () => {
             onClick={() => switchType(type)}
             className={query.type === type ? "active" : ""}
           >
-           {type}
+            {type}
           </button>
         ))}
       </div>
       <form>
         <input type="text" name="location" placeholder="City Location" />
         <input
-          type="text"
+          type="number"
           name="minPrice"
           min={0}
           max={10000000}
           placeholder="Min Price"
         />
         <input
-          type="text"
+          type="number"
           name="maxPrice"
           min={0}
           max={10000000}
@@ -50,6 +50,6 @@ const SearchBar = () => {
       </form>
     </div>
   );
-};
+}
 
 export default SearchBar;

@@ -6,7 +6,11 @@
   display: flex;
   gap: 20px;
 
-  .fullSLider {
+  @include sm {
+    height: 280px;
+  }
+
+  .fullSlider {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -30,11 +34,12 @@
         @include md {
           width: 30px;
         }
+
         @include sm {
           width: 20px;
         }
 
-        &.rightArrow {
+        &.right {
           transform: rotate(180deg);
         }
       }
@@ -71,8 +76,11 @@
 
   .bigImage {
     flex: 3;
-  }
 
+    @include sm {
+      flex: 2;
+    }
+  }
   .smallImages {
     flex: 1;
     display: flex;
@@ -80,8 +88,16 @@
     justify-content: space-between;
     gap: 20px;
 
+    @include sm {
+      flex: 1;
+    }
+
     img {
       height: 100px;
+
+      @include sm {
+        height: 80px;
+      }
     }
   }
 }

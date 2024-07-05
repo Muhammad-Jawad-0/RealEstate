@@ -20,26 +20,26 @@
       margin-bottom: 50px;
     }
 
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
-      border-radius: 2rem !important;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgb(179, 179, 179);
-      border-radius: 2rem !important;
-    }
-
     .wrapper {
       padding-right: 50px;
+
+      @include lg {
+        padding-right: 20px;
+      }
+      @include md {
+        padding-right: 0px;
+      }
 
       .info {
         margin-top: 50px;
         .top {
           display: flex;
           justify-content: space-between;
+
+          @include sm {
+            flex-direction: column;
+            gap: 20px;
+          }
 
           .post {
             display: flex;
@@ -80,6 +80,10 @@
             background-color: rgba(254, 205, 81, 0.209);
             font-weight: 600;
 
+            @include sm {
+              padding: 20px 50px;
+            }
+
             img {
               width: 50px;
               height: 50px;
@@ -90,14 +94,12 @@
         }
         .bottom {
           margin-top: 50px;
-          // margin-bottom: 50px;
           color: #555;
           line-height: 20px;
         }
       }
     }
   }
-
   .features {
     flex: 2;
     background-color: #fcf5f3;
@@ -107,18 +109,7 @@
     @include md {
       flex: none;
       height: max-content;
-    }
-
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
-      border-radius: 2rem !important;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgb(179, 179, 179);
-      border-radius: 2rem !important;
+      margin-bottom: 50px;
     }
 
     .wrapper {
@@ -126,6 +117,10 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+
+      @include md {
+        padding: 20px;
+      }
 
       img {
         width: 24px;
@@ -184,7 +179,6 @@
         .size {
           display: flex;
           align-items: center;
-          justify-content: center;
           gap: 10px;
           background-color: white;
           padding: 10px;
@@ -200,7 +194,6 @@
       .buttons {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
 
         button {
           padding: 20px;

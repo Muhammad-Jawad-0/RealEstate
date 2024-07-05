@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./slider.scss";
 
-const Slider = ({ images }) => {
+function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
 
   const changeSlide = (direction) => {
@@ -23,7 +23,7 @@ const Slider = ({ images }) => {
   return (
     <div className="slider">
       {imageIndex !== null && (
-        <div className="fullSLider">
+        <div className="fullSlider">
           <div className="arrow" onClick={() => changeSlide("left")}>
             <img src="/arrow.png" alt="" />
           </div>
@@ -31,7 +31,7 @@ const Slider = ({ images }) => {
             <img src={images[imageIndex]} alt="" />
           </div>
           <div className="arrow" onClick={() => changeSlide("right")}>
-            <img src="/arrow.png" alt="" className="rightArrow" />
+            <img src="/arrow.png" className="right" alt="" />
           </div>
           <div className="close" onClick={() => setImageIndex(null)}>
             X
@@ -53,6 +53,6 @@ const Slider = ({ images }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Slider;

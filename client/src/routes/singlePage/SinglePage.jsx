@@ -1,9 +1,9 @@
-import Slider from "../../components/slider/Slider";
 import "./singlePage.scss";
-import { singlePostData, userData } from "../../lib/dummyData";
+import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
+import { singlePostData, userData } from "../../lib/dummydata";
 
-const SinglePage = () => {
+function SinglePage() {
   return (
     <div className="singlePage">
       <div className="details">
@@ -36,7 +36,7 @@ const SinglePage = () => {
               <img src="/utility.png" alt="" />
               <div className="featureText">
                 <span>Utilities</span>
-                <p>rent a responsible</p>
+                <p>Renter is responsible</p>
               </div>
             </div>
             <div className="feature">
@@ -49,12 +49,12 @@ const SinglePage = () => {
             <div className="feature">
               <img src="/fee.png" alt="" />
               <div className="featureText">
-                <span>Property Fee</span>
-                <p>Must Have 3x the rent in total household income</p>
+                <span>Property Fees</span>
+                <p>Must have 3x the rent in total household income</p>
               </div>
             </div>
           </div>
-          <p className="title">Room Sizes</p>
+          <p className="title">Sizes</p>
           <div className="sizes">
             <div className="size">
               <img src="/size.png" alt="" />
@@ -66,7 +66,7 @@ const SinglePage = () => {
             </div>
             <div className="size">
               <img src="/bath.png" alt="" />
-              <span>1 bathrooms</span>
+              <span>1 bathroom</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>
@@ -104,13 +104,13 @@ const SinglePage = () => {
             </button>
             <button>
               <img src="/save.png" alt="" />
-              Save the place
+              Save the Place
             </button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default SinglePage;
