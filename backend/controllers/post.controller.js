@@ -4,12 +4,10 @@ export const getPosts = async (req, res) => {
     try {
         const posts = await prisma.post.findMany();
 
-        res.status(200).json({ data: posts });
+        res.status(200).json(posts);
     } catch (err) {
         console.log(err);
-        res
-            .status(500)
-            .json({ status: 500, error: err, message: "Faild to get posts" });
+        res.status(500).json({ message: "Faild to get posts" });
     }
 };
 // --------------------------------------------------------
@@ -24,22 +22,20 @@ export const getPost = async (req, res) => {
         res.status(200).json(post);
     } catch (err) {
         console.log(err);
-        res
-            .status(500)
-            .json({ status: 500, error: err, message: "Faild to get post" });
+        res.status(500).json({ status: 500, error: err, message: "Faild to get post" });
     }
 };
 // --------------------------------------------------------
 export const addPost = async (req, res) => {
     const body = req.body;
-    const tokenUserId = req.userId
+    const tokenUserId = req.userId;
     try {
         const newPost = await prisma.post.create({
             data: {
                 ...body,
                 userId: tokenUserId,
-            }
-        })
+            },
+        });
         res.status(200).json(newPost);
     } catch (err) {
         console.log(err);
@@ -52,35 +48,30 @@ export const updatePost = async (req, res) => {
         res.status(200).json({});
     } catch (err) {
         console.log(err);
-        res
-            .status(500)
-            .json({ status: 500, error: err, message: "Faild to update post" });
+        res.status(500).json({ status: 500, error: err, message: "Faild to update post" });
     }
 };
 // --------------------------------------------------------
 export const deletePost = async (req, res) => {
     const id = req.params.id;
-    const tokenUserId = req.userId
+    const tokenUserId = req.userId;
     try {
-
         const post = await prisma.post.findUnique({
-            where: { id }
-        })
+            where: { id },
+        });
 
         if (post.userId !== tokenUserId) {
-            return res.status(403).json({ message: "Not Authurized!" })
+            return res.status(403).json({ message: "Not Authurized!" });
         }
 
         await prisma.post.delete({
-            where: { id }
-        })
+            where: { id },
+        });
 
         res.status(200).json({ message: "Post Deleted" });
     } catch (err) {
         console.log(err);
-        res
-            .status(500)
-            .json({ status: 500, error: err, message: "Faild to delete post" });
+        res.status(500).json({ status: 500, error: err, message: "Faild to delete post" });
     }
 };
 // --------------------------------------------------------
