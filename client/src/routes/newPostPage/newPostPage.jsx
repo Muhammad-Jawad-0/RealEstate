@@ -4,11 +4,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/uploadWidget";
+import { useNavigate } from "react-router-dom";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ function NewPostPage() {
       const res = await apiRequest.post("/posts", {
         postData: {
           title: inputs.title,
-          price: parseInt(inputs.title),
+          price: parseInt(inputs.price),
           address: inputs.address,
           city: inputs.city,
           bedroom: parseInt(inputs.bedroom),
@@ -37,10 +40,11 @@ function NewPostPage() {
           income: inputs.income,
           size: parseInt(inputs.size),
           school: parseInt(inputs.school),
-          bus: parseInt(inputs.school),
+          bus: parseInt(inputs.bus),
           restaurant: parseInt(inputs.restaurant),
         },
       });
+      navigate("/" + res.data.id);
     } catch (error) {
       console.log(error, "<<<<<<< error");
       setError(error);
@@ -147,16 +151,23 @@ function NewPostPage() {
               <label htmlFor="restaurant">Restaurant</label>
               <input min={0} id="restaurant" name="restaurant" type="number" />
             </div>
-            <button className="sendButton">Update</button>
+            <button className="sendButton">Add</button>
             {error && <span>{error}</span>}
           </form>
         </div>
       </div>
       <div className="sideContainer">
+        {images.map((image, index) => (
+          <img src={image} key={index} alt="" />
+        ))}
         <UploadWidget
           uwConfig={{
             multiple: true,
+            cloudName: "dr2x3yrsk",
+            uploadPreset: "real-state",
+            folder: "posts",
           }}
+          setState={setImages}
         />
       </div>
     </div>
