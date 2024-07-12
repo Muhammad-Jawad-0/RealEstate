@@ -19,7 +19,12 @@ export const getPost = async (req, res) => {
             where: { id },
             include: {
                 postDetail: true,
-                user: true,
+                user: {
+                    select: {
+                        username: true,
+                        avatar: true
+                    }
+                },
             },
         });
 
@@ -35,40 +40,22 @@ export const getPost = async (req, res) => {
 export const addPost = async (req, res) => {
     const body = req.body;
     const tokenUserId = req.userId;
+
     try {
         const newPost = await prisma.post.create({
             data: {
                 ...body.postData,
                 userId: tokenUserId,
                 postDetail: {
-                    create: body.PostDetail,
+                    create: body.postDetail,
                 },
             },
         });
-        res.status(200).json({ message: newPost });
+        res.status(200).json(newPost);
     } catch (err) {
         console.log(err);
         res.status(500).json({ ERROR: err, message: "Faild to create post" });
     }
-
-    // const body = req.body;
-    // const tokenUserId = req.userId;
-
-    // try {
-    //     const newPost = await prisma.post.create({
-    //         data: {
-    //             ...body.postData,
-    //             userId: tokenUserId,
-    //             postDetail: {
-    //                 create: body.postDetail,
-    //             },
-    //         },
-    //     });
-    //     res.status(200).json(newPost);
-    // } catch (err) {
-    //     console.log(err);
-    //     res.status(500).json({ message: "Failed to create post" });
-    // }
 };
 // --------------------------------------------------------
 export const updatePost = async (req, res) => {
@@ -85,6 +72,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     const id = req.params.id;
     const tokenUserId = req.userId;
+
     try {
         const post = await prisma.post.findUnique({
             where: { id },
@@ -107,3 +95,5 @@ export const deletePost = async (req, res) => {
     }
 };
 // --------------------------------------------------------
+
+
