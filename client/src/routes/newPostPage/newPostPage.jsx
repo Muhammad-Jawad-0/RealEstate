@@ -3,7 +3,7 @@ import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
-import UploadWidget from "../../components/uploadWidget/uploadWidget";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
 
 function NewPostPage() {
@@ -165,7 +165,7 @@ function NewPostPage() {
             multiple: true,
             cloudName: "dr2x3yrsk",
             uploadPreset: "real-state",
-            folder: "posts",
+            folder: "Posts",
           }}
           setState={setImages}
         />
